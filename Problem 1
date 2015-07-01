@@ -1,0 +1,16 @@
+import math
+def problem_1(num):  #SUM OF MULTIPLES
+    
+    counter = 0    
+    sum = 0
+    
+    while (counter < num):
+        
+        if(counter % 3  == 0):
+            sum = sum + counter
+        elif (counter % 5 == 0):
+            sum = sum + counter
+        
+        counter = counter + 1
+        
+    return sum
