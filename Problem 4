@@ -1,0 +1,13 @@
+import math
+
+def ispalindrome(n):
+    #checks if n is a palindrome
+    return str(n) == str(n)[::-1] #checks if the string is equal to its reverse
+
+temp = [0]    
+for i in range (999, 100, -1): #for both of these loops, we find all products
+    for j in range (999,100, -1):
+        if ispalindrome(i*j):
+            temp.append(i*j) #list of all 3x3 palindromes
+
+#command max(temp) in shell to find the largest palindrome  
