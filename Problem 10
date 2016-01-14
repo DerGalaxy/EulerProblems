@@ -1,0 +1,65 @@
+"""
+The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+"""
+#I tried to implement a non-recursive version of the sieve of Eratosthenes
+#how would i make it recursive? is that even possible?
+
+#the sieve features "marking", so I tried to use that
+#inspired from how marking is used in other algorithms
+#it is VERY FAST
+def mark(sieve, i):
+    for x in range(i+i, len(sieve), i):
+        sieve[x] = False
+
+def sum_primes(limit):
+    sieve = [True] * limit
+    
+    for i in range(2, int(limit**.5) + 1):
+        if sieve[i]:
+            mark(sieve, i)
+    
+    return sum([i for i in range(2, len(sieve)) if sieve[i]])    
+    
+#without marking (takes an even long time for large numbers, like 2000000)
+#thinking about it much later, its not really the sieve of eratosthenes
+def sieve(nums, p, limit):
+    """(list, int, int) -> list
+    Sieve through multiples of 1 value (p).
+    """
+    for i in range(p+p, limit, p):
+        nums = [x for x in nums if x != i]
+        
+    return nums
+
+def add_primes(limit):
+    nums = [i for i in range(limit) if i != 0 and i != 1]
+    i = 0
+    while nums[i] < int(limit**.5) + 1:
+        nums = sieve(nums, nums[i], limit)
+        if i < len(nums): 
+            i += 1
+        
+    return sum(nums)
+
+""" BRUTE FORCE
+def isprime(n):
+    #return true if n is prime
+    i=2
+    while i < n:
+        if n % i == 0:
+            return False
+        i += 1
+    return False if n == 1 else True
+
+def add_primes(limit):
+    add = 0
+    n=2
+    while n < limit:
+        if isprime(n):
+            add += n
+        n += 1
+    
+    return add
+"""
