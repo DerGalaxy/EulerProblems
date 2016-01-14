@@ -1,0 +1,29 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Jan 02 21:31:25 2016
+
+@author: Keats
+
+Starting in the top left corner of a 2Ã—2 grid, and only being able to move to 
+the right and down, there are exactly 6 routes to the bottom right corner.
+
+https://projecteuler.net/project/images/p015.gif
+
+How many such routes are there through a 20Ã—20 grid?
+"""
+n = 20 #represents a (n-1)x(n-1) grid
+
+#could make a tree in the shape of a square grid from the top left corner
+#to the bottom right by diagonal, then evaluate the number of paths
+#BUT I won't do that, I will do it more mathematically elegant. 
+
+paths = [1] #list of number of paths for nxn grids, indexed by n
+for i in range(1,n):
+    temp = paths
+    temp.append(2*sum(paths))
+    for j in range(1,len(paths)-1):
+        temp[j] = temp[j-1]+paths[j]
+    paths = temp
+    
+print paths
+print 2*sum(paths)
